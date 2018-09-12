@@ -105,11 +105,11 @@ function dd {
                 $null = New-Item -Path $OutFile -Force
                 $OutputStream = [System.IO.FileStream]::new($OutFile, [System.IO.FileMode]::Open)
                 $InputStream.CopyTo($OutputStream)
+                $OutputStream.Close()
+                $OutputStream.Dispose()
             }
             $InputStream.Close()
             $InputStream.Dispose()
-            $OutputStream.Close()
-            $OutputStream.Dispose()
         }
         Write-Progress -Activity "Copy from $OutFile to $InFile completed" -PercentComplete 100 -Completed
     }
